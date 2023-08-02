@@ -1,0 +1,74 @@
+<div class="container">
+    <header>
+        <div class="d-flex flex-row justify-content-center">
+          <div class="row">
+            <div class="col-md">
+              <img class= "img_1" src="https://economictimes.indiatimes.com/thumb/msid-59738992,width-640,height-480,resizemode-75,imgsize-25499/amazon.jpg" alt="Amazon Logo"/>
+            </div>
+          </div>
+        </div>
+     </header> 
+    <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="bar error"  *ngIf="showErrorMessage">
+          <p class="ms-2">{{contentErrorMessage}}</p>
+      </div>
+          <form method="POST"  (ngSubmit)="register()"   [formGroup]="form" role="form">
+              <div class="form-group">
+                  <h2>Create account</h2>
+              </div>
+              <div class="form-group mb-2">
+                  <strong>Your name</strong>
+                  <input id="userName" name="userName" type="text" maxlength="50"
+                  formControlName="userName" class="form-control"
+                  [ngClass]="{'is-invalid':(userName?.touched||userName?.dirty)&&userName?.invalid}" >
+                  <span class="invalid-feedback">
+                    <span *ngIf="userName?.errors?.['required']">Please enter your Name</span>
+                   </span>
+              </div>
+              <div class="form-group mb-2">
+                  <strong>Enter Your Email or Mobile Phone</strong>
+                  <input id="EmailAddress" name="EmailAddress"  maxlength="50" 
+                   formControlName="EmailAddress" class="form-control"
+                  [ngClass]="{'is-invalid':(EmailAddress?.touched||EmailAddress?.dirty)&&EmailAddress?.invalid}" >
+                  <span class="invalid-feedback">
+                    <span *ngIf="EmailAddress?.errors?.['required']">Please enter your Email or Phone</span>
+                   </span>
+              </div>
+              <div class="form-group mb-2">
+                <label for="Password"><strong>Password</strong></label>
+                <input  maxlength="25" 
+                formControlName="Password"
+                id="Password" 
+                type="Password" 
+                class="form-control"
+                  [ngClass]="{'is-invalid':(Password?.touched||Password?.dirty)&&Password?.invalid}" >
+                <span class="invalid-feedback">
+                  <span *ngIf="Password?.errors?.['required']">Please enter your Password</span>
+                  <span *ngIf="Password?.errors?.['pattern']">Password must be more complex</span>
+                 </span>
+              </div>
+              <div class="form-group mb-2">
+                <label for="ConfirmPassword"><strong>Confirm Password</strong></label>
+                  <input required maxlength="25" 
+                  class="form-control"
+                   formControlName="ConfirmPassword"
+                id="ConfirmPassword" 
+                type="Password"
+                [ngClass]="{'is-invalid':(ConfirmPassword?.touched||ConfirmPassword?.dirty)&&ConfirmPassword?.invalid}" >
+                <span class="invalid-feedback">
+                  <span *ngIf="ConfirmPassword?.errors?.['required']">Please enter your Confirm Password</span>
+                  <span *ngIf="ConfirmPassword?.errors?.['pattern']">Confirm Password must be more complex</span>
+                  <span *ngIf="ConfirmPassword?.errors?.['confirmedValidator']">Password and Confirm Password must be matched</span>
+                 </span>
+              </div>
+              <div class="form-group mb-2" style="padding-top: 15px;">
+                  <button id="signinSubmit" type="submit" class="btn col-12 mx-auto">Create your Amazon account</button>
+              </div><br>
+              <p class="form-group">Alread have an account? <a href="#" routerLink="/Login" style="text-decoration: none;">Sing in</a></p>
+          </form>
+      </div>
+    </div>
+    </div>
+    </div>

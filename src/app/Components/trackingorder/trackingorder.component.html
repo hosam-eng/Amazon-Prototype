@@ -1,0 +1,86 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-7">
+      <h3 style="color: rgb(13, 191, 117);">{{'Arriving in'|translate}} {{order.arrivalDate|date:'short'}}</h3>
+    </div>
+  </div>
+
+  <div class="row" style="direction: ltr;">
+    <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    <div class="container padding-bottom-3x mb-1">
+      <div class="card mb-3">
+        <div class="p-4 text-center text-white text-lg bg-dark rounded-top"><span class="text-uppercase">{{'Tracking Order No -'|translate}} </span><span class="text-medium">{{order.id}}</span></div>
+        <div class="d-flex flex-wrap flex-sm-nowrap justify-content-between py-3 px-2 bg-secondary">
+          <div class="w-100 text-center py-1 px-2"><span class="text-medium">{{'Shipped Via'|translate}}:</span>{{'Amazon Team'|translate}}</div>
+          <div class="w-100 text-center py-1 px-2"><span class="text-medium">{{'Status'|translate}}:</span>{{order.status+1}}</div>
+          <div class="w-100 text-center py-1 px-2">{{order.arrivalDate|date}}:{{'Arrival Date'|translate}}
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
+            <div class="step completed ">
+              <div class="step-icon-wrap">
+                <div class="step-icon"><i class="fa-solid fa-cart-shopping fs-3"></i></div>
+              </div>
+              <h4 class="step-title">{{'Ordered Today'|translate}}</h4>
+            </div>
+            <div class="step " [class.completed]="order.status > 0">
+              <div class="step-icon-wrap">
+
+                <div class="step-icon"><i class="fa-solid fa-gear"></i></div>
+              </div>
+              <h4 class="step-title">{{'Shipped'|translate}}</h4>
+            </div>
+            <div class="step " [class.completed]="order.status > 1">
+              <div class="step-icon-wrap">
+                <div class="step-icon"><i class="fa-solid fa-truck"></i></div>
+              </div>
+              <h4 class="step-title">{{'out For Delivery'|translate}}</h4>
+            </div>
+            <div class="step " [class.completed]="order.status > 2">
+              <div class="step-icon-wrap">
+                <div class="step-icon"> <i><img  src="/assets/images/man.png" style="width: 35px;height: 35px;"></i></div>
+              </div>
+              <h4 class="step-title">{{'Arrived'|translate}}</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="row ">
+
+    <div class="col-md-5 col-sm-12 mb-2">
+      <div class="card mb-3 p-4 " style="color:rgb(16, 79, 53) ;">
+        <h3>{{'Shipping Address'|translate}}</h3>
+        <h6>{{shippingAddress.name}}</h6>
+        <h6>{{shippingAddress.buildname}}</h6>
+        <h6>{{shippingAddress.street}}</h6>
+        <h6>{{shippingAddress.cityname}}</h6>
+      </div>
+    </div>
+    <div class="col-md-5 col-sm-12 mb-2 ">
+      <div class="card mb-3 p-4 " style="color:rgb(34, 79, 60) ;">
+        <h4>{{'Order info'|translate}}</h4>
+        <br>
+        <br>
+        <button class="btn btn-warning col-md-5" *ngIf="order.status<2" (click)="show()">
+          <h5>{{'Cancel order'|translate}}</h5></button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container  cont" style=" display:none;background-color:#81b66e;" #popup>
+  <div class="popup1" >
+
+    <h2>Are you sure you want</h2>
+    <h2> to cancel this order</h2>
+    <button  class="btn btn-warning shadow-0 m-2 rounded-pill"
+     (click)="cancelOrder(order.id)">Yes</button>
+     <button  class="btn btn-warning shadow-0 m-2 rounded-pill"
+     (click)="close()">NO</button>
+
+  </div>
+</div>

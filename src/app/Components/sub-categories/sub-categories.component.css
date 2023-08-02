@@ -1,0 +1,21 @@
+
+.text {
+  font-size: 23px;
+  font-weight: bold
+}
+.container{
+  background-color: #F2EAE3;
+}
+.card {
+  height: 130px;
+  overflow: hidden;
+  border: none;
+  border-radius: 15px
+}
+
+.imagename {
+  font-size: 14px;
+  font-weight: bold
+}
+
+

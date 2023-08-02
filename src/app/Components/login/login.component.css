@@ -1,0 +1,49 @@
+form { margin: 0px 10px; }
+.img_1 {
+    width: 110px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+  }
+h2 {
+  margin-top: 2px;
+  margin-bottom: 20px;
+}
+
+.container { max-width: 400px;
+ }
+
+.divider {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+.divider hr {
+  margin: 12px 0px;
+  width: 32%;
+}
+small{
+    color: #666;
+}
+
+.left { float: left; }
+
+.right { float: right; }
+#signinSubmit{
+background-color:rgb(247, 155, 80);
+color: black;
+border: none;
+border: 1px solid rgb(219, 129, 56);
+
+}
+.btn.col-12.mx-auto{
+    border: none;
+    color: black;
+    background-color:#D8D8D8;
+    border: 1px solid rgb(161, 150, 150);
+}
+.error {
+  color: #ba3939;
+  background: #ffe0e0;
+  border: 1px solid #a33a3a;
+}

@@ -1,0 +1,61 @@
+
+<div *ngIf="orders!=null" class="d-flex justify-content-center align-items-center text-center" style="min-height: 400px;">
+  <div class="col-8">
+  <h4 class="text-dark">You have not made any orders yet.<br> You can easily order any product from our website.<br>
+    </h4>
+    <button class="col-md-3 btn btn-warning" routerLink="/Home">go Home</button>
+    </div>
+</div>
+<div class="container">
+  <div *ngFor="let order of orders">
+    <div class="card p-2 bg-white border rounded my-2">
+      <div class="card-header">
+        <span>{{'Arrival Date'|translate}}: {{order.arrivalDate|date:'short'}}</span>
+        <span class="mx-5">{{'Total'|translate}} :{{order.total|currency}} </span>
+      </div>
+      <div class="d-flex justify-content-center row">
+        <div class="col-md-8">
+          <div *ngFor="let orderitem of order.orderItems">
+            <div class="col-md-10 my-2">
+              <div class="d-flex">
+                <div class="col-md-2 mt-1">
+                  <img class="img-fluid img-responsive rounded product-image" [src]="orderitem.imgUrl">
+                </div>
+                <div class="col-md-4 mt-1 mx-4">
+                  <ng-container *ngIf="language == 'en';else checkl">
+                    <p class="title">{{orderitem.productname}}</p>
+                    <p class="title"> {{orderitem.count}}</p>
+                    <p class="title"> {{orderitem.productPrice|currency:'EGP':'symbol'}}</p>
+                  </ng-container>
+                  <ng-template #checkl>
+                    <p class="title">{{orderitem.productname}}</p>
+                    <p class="title"> {{orderitem.count}}</p>
+                    <p class="title"> {{orderitem.productPrice|currency:'ج.م':'symbol'}}</p>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class=" col-md-4 mt-4 "><button  *ngIf="order.status<3" class="btn col-md-4 btn-warning btn-sm" type="button"
+          (click)="trackPackage(order.id)">{{'Tracking'|translate}}</button>
+          <br>
+          <h3  style="color: green;font-weight: bold;" *ngIf="order.status>=3" >Delivered</h3>
+          <button *ngIf="order.status<2" class="btn btn-warning col-md-4 btn-sm my-4"  type="button"
+            (click)="show(order.id)">{{'Cancel'|translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="popup1" #popup >
+
+      <h2>Are you sure you want</h2>
+      <h2> to cancel this order</h2>
+      <button  class="btn btn-warning shadow-0 m-2 rounded-pill"
+       (click)="cancelOrder()">Yes</button>
+       <button  class="btn btn-warning shadow-0 m-2 rounded-pill"
+       (click)="close()">NO</button>
+    </div>
+
+

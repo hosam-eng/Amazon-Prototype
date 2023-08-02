@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="row d-flex justify-content-center p-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-7">
+        <h3>Change your {{key}}</h3>
+    </div>
+    </div>
+     <div class="col-7 rounded border ms-2 border-1">
+        <div *ngIf="key=='name'|| key=='email'">
+         <p class="text-dark">If you want to change the name associated with your Amazon customer account, you may do so below. Be sure to click the<strong>Save Changes</strong> button when you are done.</p>
+         <div class="m-2">
+            <h6>new  {{key}}:</h6>
+         </div>
+        </div>
+        <form method="POST" (ngSubmit)="saveChanges()" [formGroup]="form" role="form">
+            <container_element [ngSwitch]="key">  
+                <input type="text"
+                id="userName" 
+                name="userName"
+        formControlName="userName"
+        class="form-control"
+        *ngSwitchCase="'name'"
+          [ngClass]="{'is-invalid':(userName?.touched||userName?.dirty)&&userName?.invalid}" >
+        <span class="invalid-feedback">
+          <span *ngIf="userName?.errors?.['required']">name required*</span>
+         </span>
+                <div *ngSwitchCase="'phone'">
+                    <span class="my-3"><strong>mobile number </strong></span>
+                    <div class="d-flex flex-row my-4">
+                   <span class="m-1 mx-2">EG +20</span>
+                   <div class="col-5">
+                   <input type="text"
+                    id="phone"
+                    formControlName="phone"
+                    class="form-control"
+                   *ngSwitchCase="'phone'" [ngClass]="{'is-invalid':(phone?.touched||phone?.dirty)&&phone?.invalid}" >
+                   <span class="invalid-feedback">
+                     <span *ngIf="phone?.errors?.['required']">phone required*</span>
+                    </span>
+                </div>
+                </div>  
+                </div>
+                <input  type="text"
+                id="emailAddress" 
+                formControlName="emailAddress"
+                class="form-control"
+                *ngSwitchCase="'email'" [ngClass]="{'is-invalid':(emailAddress?.touched||emailAddress?.dirty)&&emailAddress?.invalid}" >
+                <span class="invalid-feedback">
+                  <span *ngIf="emailAddress?.errors?.['required']">email required*</span>
+                  <span *ngIf="emailAddress?.errors?.['pattern']">Please enter your Email</span>
+                 </span>
+                <input  type="text" *ngSwitchDefault>
+            </container_element>
+            <div class="m-4">
+            <button type="submit" [disabled]="!form.valid" class="btn btn-warning rounded">Save changes</button>
+            </div>
+        </form>
+         </div>
+        </div>
+     </div>
+
+ 

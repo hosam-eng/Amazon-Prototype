@@ -1,0 +1,265 @@
+<div class="container-flud">
+  <div class="row g-0 m-3">
+    <div class="col-md-7 col-sm-12 m-4 bg-white">
+      <div class="row">
+      <div *ngIf="isCheck == false">
+        <div class="m-2" style="color: rgb(194, 23, 23); font-weight: bold">
+          1: {{ "Enter a new shipping address" | translate }}
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <form [formGroup]="shippingForm" (ngSubmit)="addShippingAddress()">
+              <div class="form-group col-md-8 col-sm-12 mb-2">
+                <label for="fullname" class="col-md-4 col-form-label">{{
+                  "Full Name" | translate
+                }}</label>
+                <br />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="fullname"
+                  placeholder="{{ 'Full Name' | translate }}"
+                  name="name"
+                  formControlName="name"
+                  [ngClass]="{
+                    'is-invalid': (name?.touched || name?.dirty) && name?.invalid
+                  }"
+                />
+              </div>
+              <div class="form-group col-md-8 col-sm-12 mb-2">
+                <label for="phone" class="col-md-4 col-form-label">{{
+                  "Phone Number" | translate
+                }}</label>
+                <br />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="phone"
+                  placeholder="{{ 'Phone Number' | translate }}"
+                  name="phone"
+                  formControlName="phone"
+                  [ngClass]="{
+                    'is-invalid':
+                      (phone?.touched || phone?.dirty) && phone?.invalid
+                  }"
+                />
+              </div>
+  
+              <div class="form-group col-md-8 col-sm-12 mb-2">
+                <label class="col-md-6 col-form-label" for="countryid"
+                  >{{ "Select your country" | translate }} :</label
+                >
+                <br />
+                <select
+                  id="countryid"
+                  (change)="getAllCitiesBycountryId()"
+                  formControlName="countryid"
+                  class="form-control"
+                  name="countryid"
+                >
+                  <option
+                    *ngFor="let country of countryList"
+                    [value]="country.id"
+                  >
+                    {{ country.name }}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group col-md-8 col-sm-12 mb-2">
+                <label class="col-md-4 col-form-label" for="cityid"
+                  >{{ "Select your city" | translate }} :</label
+                >
+                <br />
+                <select
+                  id="cityid"
+                  formControlName="cityid"
+                  class="form-control"
+                  name="cityid"
+                >
+                  <option *ngFor="let city of cityList" [value]="city.id">
+                    {{ city.name }}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group col-md-8 col-sm-12 mb-2">
+                <label for="street" class="col-md-4 col-form-label">{{
+                  "street name" | translate
+                }}</label>
+                <br />
+  
+                <input
+                  type="text"
+                  class="form-control"
+                  id="street"
+                  placeholder="{{ 'street name' | translate }}"
+                  name="street"
+                  formControlName="street"
+                  [ngClass]="{
+                    'is-invalid':
+                      (street?.touched || street?.dirty) && street?.invalid
+                  }"
+                />
+              </div>
+              <div class="form-group col-md-8 col-sm-12 mb-2">
+                <label for="buildName" class="col-md-4 col-form-label"
+                  >{{ "build Name" | translate }}
+                </label>
+                <br />
+  
+                <input
+                  type="text"
+                  class="form-control"
+                  id="buildName"
+                  placeholder="{{ 'build Name' | translate }}"
+                  name="street"
+                  formControlName="buildName"
+                  [ngClass]="{
+                    'is-invalid':
+                      (buildName?.touched || buildName?.dirty) && street?.invalid
+                  }"
+                />
+              </div>
+  
+              <br />
+              <button
+                type="submit"
+                class="btn btn-warning"
+                [disabled]="!shippingForm.valid"
+              >
+                {{ "Submit" | translate }}
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  <div class="row">
+      <div *ngIf="isCheck == true">
+        <div class="row">
+          <div class="col-md-5 col-sm-12 mb-2 bg-white">
+            <div>1 {{ "Shipping Address" | translate }}</div>
+          </div>
+          <div class="col-md-5 col-sm-12 mb-2 bg-white">
+            <div>{{ shipping.name }}</div>
+            <div>{{ shipping.buildname }}</div>
+            <div>{{ shipping.street }}</div>
+            <div>{{ shipping.cityname }}</div>
+          </div>
+          <!-- <div class="col-md-2 col-sm-12 bg-white" style="text-align: right">
+            <a
+              class="link"
+              style="text-decoration: none; color: rgb(87, 87, 186)"
+              >{{ "Change" | translate }}</a
+            >
+          </div> -->
+          <hr style="border-top: 3px solid black; margin: 0 auto" />
+        </div>
+        
+      </div>
+    </div>
+    <div class="row">
+        <div class="m-2" style="color:  rgb(194, 23, 23);font-weight:bold;; ">2-{{"Payment Method"}}</div>
+        <div class=" mt-50 mb-50" style="  width: 500px; padding: 3rem 3.5rem;">
+          <form>
+             <div class="row" >
+              <div class="col-7">
+                <div class="row-1">
+                  <div class="row row-2">
+                    <span id="card-inner">{{'Paypal'|translate}}</span>
+                    <img src="https://i.imgur.com/7kQEsHU.png" style="width: 80px">
+                    <div class="row row-2">
+                       <div id="myPaypalButtons" class="d-flex justify-content-center mt-3"></div>
+                    </div>
+                  </div>
+                 </div>
+            </div>
+            </div>
+            </form>
+        </div>
+          
+    </div> 
+  </div>
+  
+  
+
+    <div class="col-md-4 col-sm-12 m-3 bg-white text-center">
+      <div class="card">
+        <div class="card-header">
+          <!-- <ng-container [ngSwitch]="">
+
+        <ng-container *ngSwitchCase="0">
+
+          <p class="text-danger">Out Of Stock</p>
+
+        </ng-container>
+
+        <ng-container *ngSwitchCase="1">
+
+          <p class="text-danger">last One</p>
+
+        </ng-container>
+
+        <ng-container *ngSwitchCase="2">
+
+          <p class="text-danger">LastTwo</p>
+
+        </ng-container>
+
+        <ng-container *ngSwitchDefault><p class="text-success">in Stock</p></ng-container>
+
+      </ng-container> -->
+          <ng-container [ngSwitch]="isCheck">
+            <ng-container *ngSwitchCase="true">
+              <button
+                *ngIf="isCheckLen"
+                class="btn btn-warning"
+                (click)="createOrder()"
+              >
+                {{ "Proceed to order" | translate }}
+              </button>
+            </ng-container>
+            <ng-container *ngSwitchCase="false">
+              <button class="btn btn-warning">
+                {{ "use this address" | translate }}
+              </button>
+            </ng-container>
+          </ng-container>
+        </div>
+        <div class="card-body">
+          {{ "choose a shipping address to continue" | translate }}<br />
+          {{ "checking out you still have chance to" | translate }} <br />
+          {{ "review and edite your order befor its final" | translate }}
+          <hr style="border-top: 3px solid black; margin: 0 auto" />
+          <div style="text-align: left">
+            <h3>{{ "Order Summary" | translate }}</h3>
+
+            <div class="d-flex justify-content-between">
+              <span>{{ "items" | translate }}:</span
+              ><span>{{ totalPrice }}</span>
+            </div>
+            <div>
+              <span>{{ "Shipping &handling" | translate }}</span>
+            </div>
+          </div>
+          <hr style="border-top: 1px solid black; margin: 5 auto" />
+          <div class="d-flex justify-content-between">
+            <h3 style="color: rgb(194, 23, 23)">
+              {{ "order total" | translate }}:
+            </h3>
+            <h3 style="color: rgb(194, 23, 23)">{{ totalPrice }}</h3>
+          </div>
+
+          <div class="card-header">
+            <div>{{ "how are shipping costs calculated" | translate }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <h2>{{shippingaddress|json}}</h2> -->
+  <!-- <h2>{{userForm.dirty|json}}</h2>
+<h2>{{userForm.touched|json}}</h2>
+<h2>{{userForm.valid|json}}</h2> -->
+</div>
+<!-- <hr> -->

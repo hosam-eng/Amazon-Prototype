@@ -1,0 +1,135 @@
+<!-- <div class="container-flued">
+  <div class="row g-0 ">
+    <div class="col-md-8 col-sm-12 m-3 bg-white ">
+      <h2>Shopping Cart</h2>
+      <hr>
+      <div  *ngFor="let item of products;let i=index" class=" d-flex flex-row border-bottom mt-2">
+      <section class="gallery col-md-2 m-2" >
+          <div class="img-container">
+          <ng-container *ngIf="item.images.length > 0">
+              <img [src]="item.images[0]" class="img-fluid img-prev" id="preview" style="height: 200px;" alt=".....">
+          </ng-container>
+          </div>
+      </section>
+      <div class="col-md-7 col-sm-12 mx-2">
+          <div>
+            <p class="fs-5">{{item?.name}}</p>
+          </div>
+          <div>
+            <p class="fs-5 "><strong>{{item?.price|currency:'EGP':'symbol'}}</strong></p>
+          </div>
+          <div>
+              <ng-container [ngSwitch]="item?.unitInStock">
+                <ng-container *ngSwitchCase="0">
+                  <p class="text-danger">Out Of Stock</p>
+                </ng-container>
+                <ng-container *ngSwitchCase="1">
+                  <p class="text-danger">last One</p>
+                </ng-container>
+                <ng-container *ngSwitchCase="2">
+                  <p class="text-danger">LastTwo</p>
+                </ng-container>
+                <ng-container *ngSwitchDefault><p class="text-success">in Stock</p></ng-container>
+              </ng-container>
+            </div>
+            <div>
+              <label class="mt-3 mx-2">Qty :</label>
+              <select (change)="updateItem(item.id,selectedOption[i])"  [(ngModel)]="selectedOption[i]" class=" rounded-pill d-inline mx-auto">
+                <ng-container *ngFor="let i of numbers">
+                  <option class="text-center">{{i}}</option>
+                </ng-container>
+              </select>
+              <button (click)="removeItem(item?.id)" class="btn btn-link">Delete</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-12 m-3 bg-white text-center">
+      <p><span style="color: rgb(87, 165, 122);">Your order qualifies for FREE Shipping</span> Choose this option at checkout.
+        <a href="#" class="bnt btn-link">see details</a>
+      </p>
+      <p>
+       <strong> subItems({{numOfItems}}): {{totalPrice |currency:'EGP':'symbol'}}</strong>
+      </p>
+      <button  routerLink="/shipping" class="btn btn-warning" [disabled]="!isCheck">Proceed To Buy</button>
+    </div>
+  </div>
+</div> -->
+<section class="h-100" style="background-color: #eee;">
+  <div class="container h-100 py-5">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-10">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h3 class="fw-normal mb-0 text-black">{{'Shopping Cart'|translate}}</h3>
+        </div>
+
+        <ng-container *ngFor="let item of products;let i=index">
+        <div class="card rounded-3 mb-4">
+          <div class="card-body p-4">
+            <div class="row d-flex justify-content-between align-items-center">
+
+              <div class="col-md-2 col-lg-2 col-xl-2">
+                <img [src]="item.images[0]"
+                  class="img-fluid rounded-3" alt="Cotton T-shirt">
+              </div>
+              <div class="col-md-3 col-lg-3 col-xl-3">
+                <ng-container *ngIf="language=='en';else langn">
+                  <p class="lead fw-normal mb-2">{{item.name}}</p>
+                </ng-container>
+                <ng-template #langn>
+                  <p class="lead fw-normal mb-2">{{item.arabicName}}</p>
+                </ng-template>
+              </div>
+              <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                <select (change)="updateItem(item.id,selectedOption[i])"  [(ngModel)]="selectedOption[i]" class=" mx-auto form-control" style="width: 70px;border-radius: 25px;">
+                  <ng-container *ngFor="let i of numbers">
+                    <option class="text-center">{{i}}</option>
+                  </ng-container>
+                </select>
+              </div>
+              <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                <ng-container *ngIf="language=='en';else langp">
+                  <h5 class="mb-0">{{item.price|currency:"EGP":"symbol"}}</h5>
+                </ng-container>
+                <ng-template #langp>
+                  <h5 class="mb-0">{{item.price|currency:"ج.م":"symbol"}}</h5>
+                </ng-template>
+              </div>
+              <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                <a  class="text-danger" (click)="removeItem(item?.id)"><i class="fas fa-trash fa-lg"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+        <div class="card">
+          <div class="card-body">
+            <button type="button" class="btn btn-warning btn-block btn-lg" [disabled]="!isCheck" routerLink="/shipping">{{'Proceed to Pay'|translate}}</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

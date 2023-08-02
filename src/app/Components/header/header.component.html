@@ -1,0 +1,50 @@
+
+  <header class="bg-dark text-white p-2" id="top">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-1 col-sm-12 text-center  my-sm-1">
+          <a href="/" class=" mb-2 mx-3 mb-lg-0 text-white text-decoration-none">
+            <i class="fa-brands fa-amazon fs-2"></i>
+          </a>
+        </div>
+        <div class="col-md-2 col-sm-12 my-sm-1">
+          <select class="form-select text-center " [(ngModel)]="Changlang">
+            <option value="en">English</option>
+            <option value="ar">العربيه</option>
+          </select>
+        </div>
+        <div class="col-md-4 col-sm-12 text-center my-sm-1">
+          <div class="input-group mx-md-2 text-sm-start" dir="ltr">
+            <!-- <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="true">All</button> -->
+            <!-- <ul class="dropdown-menu" id="dropdown">
+              <li *ngFor="let item of CategoryList"><a class="dropdown-item" href="#">{{item.name}}</a></li>
+            </ul> -->
+            <select class="form-select" [(ngModel)]="categoryId">
+              <option value="0">{{'All'|translate}}</option>
+              <ng-container *ngFor="let item of CategoryList">
+                <option [value]="item.id" *ngIf="_lang=='en';else check">{{item.name}}</option>
+                <ng-template #check><option [value]="item.id">{{item.arabicName}}</option></ng-template>
+              </ng-container>
+
+            </select>
+            <input type="text" class="form-control w-50" #term [(ngModel)]="prodname" aria-label="Text input with dropdown button">
+            <a class="btn btn-outline-secondary" (click)="onSearchButtonClick(term.value)" type="button" style="background-color: rgb(255, 194, 103) ;color: #232F3E;" id="button-addon1">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </a>
+          </div>
+        </div>
+
+      <div class="col-md-5 col-sm-12 text-sm-center my-sm-1">
+        <div class="text-md-center text-sm-center d-flex justify-content-evenly">
+          <button type="button" class="btn btn-outline-light mx-2 px-3" [hidden]="isLoggedin"  routerLink="/Login" >{{'Login'|translate}}</button>
+          <button type="button" class="btn btn-warning px-3"  [hidden]="isLoggedin" routerLink="/register" >{{'Sign-up'|translate}}</button>
+          <!-- <p><span class="mx-2">Welcome<br>{{user.userName}}</span></p> -->
+          <button type="button" class="btn btn-outline-light mx-2 px-3"  [hidden]="!isLoggedin" (click)="goToProfile()" >{{user.userName}}</button>
+          <button type="button" class="btn btn-outline-light mx-2 px-3"  [hidden]="!isLoggedin" (click)="Logout()" >{{'Logout'|translate}}</button>
+          <button type="button" routerLink="/Order" class="btn btn-outline-light mx-2 px-3">{{'Order'|translate}}</button>
+          <button type="button" routerLink="/Cart" class="btn btn-outline-light mx-1 px-3" ><i class="fa-solid fa-cart-shopping fs-3"></i>{{'Cart'|translate}}</button>
+        </div>
+      </div>
+      </div>
+    </div>
+</header>

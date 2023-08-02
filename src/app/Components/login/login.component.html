@@ -1,0 +1,56 @@
+<div class="container">
+    <header>
+              <div class="d-flex flex-row justify-content-center">
+                <div class="row">
+                  <div class="col-md">
+                    <img class= "img_1" src="https://economictimes.indiatimes.com/thumb/msid-59738992,width-640,height-480,resizemode-75,imgsize-25499/amazon.jpg" alt="Amazon Logo"/>
+                  </div>
+                </div>
+              </div>
+           </header>
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="bar error"  *ngIf="showErrorMessage">
+                  <p class="ms-2">Invalid username or password Please try again</p>
+              </div>
+                <form method="POST" (ngSubmit)="login()" [formGroup]="form" role="form">
+                    <div class="form-group">
+                        <h2>Login</h2>
+                    </div>
+                    <div class="form-group mb-2">
+                        <strong>Enter Your Email or Mobile Phone</strong>
+                        <input id="EmailAddress" name="EmailAddress" maxlength="50"
+                         formControlName="EmailAddress" class="form-control"
+                        [ngClass]="{'is-invalid':(EmailAddress?.touched||EmailAddress?.dirty)&&EmailAddress?.invalid}" >
+                        <span class="invalid-feedback">
+                          <span *ngIf="EmailAddress?.errors?.['required']">Please enter your Email or Phone</span>
+                         </span>
+                    </div>
+                    <div class="form-group mb-2">
+                      <label for="password"><strong>Password</strong></label>
+                      <input  maxlength="25"
+                      formControlName="password"
+                      id="password"
+                      type="password"
+                      class="form-control"
+                        [ngClass]="{'is-invalid':(Password?.touched||Password?.dirty)&&Password?.invalid}" >
+                      <span class="invalid-feedback">
+                        <span *ngIf="Password?.errors?.['required']">Please enter your Password</span>
+                        <span *ngIf="Password?.errors?.['pattern']">Password must be more complex</span>
+                       </span>
+                    </div>
+                    <div class="form-group" style="padding-top: 15px;">
+                        <button id="signinSubmit" type="submit" class="btn col-12 mx-auto">Sign in</button>
+                    </div>
+                    <div class="form-group divider">
+                        <hr class="left"><small>New to Amazon?</small><hr class="right">
+                    </div>
+                    <p class="form-group"><a href="#" routerLink="/register" class="create" class="btn col-12 mx-auto" >Create an account</a></p>
+                    <p class="form-group">By signing in you are agreeing to our <a href="#">Conditions of Use and Sale</a> and our <a href="#">Privacy Nodtice</a>.</p>
+                </form>
+            </div>
+        </div>
+    </div>
+  </div>
+  <!-- <h2>{{user |json}}</h2> -->

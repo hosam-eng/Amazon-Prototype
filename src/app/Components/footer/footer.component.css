@@ -1,0 +1,12 @@
+.BackToTop{
+background-color: #232F3E;
+}
+.BackToTop a{
+    text-decoration-line: none;
+}
+.BackToTop:hover{
+ filter:brightness(120%);
+}
+.Copyright{
+    background-color: #232F3E;
+}

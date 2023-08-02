@@ -1,0 +1,133 @@
+<!-- Remove the container if you want to extend the Footer to full width. -->
+<div class="container-fluid  bg-dark">
+  <div class="row BackToTop" >
+     <!-- BackToTop -->
+   <div class="text-center px-0 py-3 text-light ">
+    <span appScroolpage id="clic">{{'Back to top'|translate}}</span>
+ </div>
+ <!-- BackToTop -->
+  </div>
+
+  <footer class="text-white py-0 ">
+    <!-- Grid container -->
+    <div class="container mx-auto   py-4">
+      <!--Grid row-->
+      <div class="row mt-4 w-75 mx-auto">
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-12 mb-4  mb-md-0">
+          <h6 class="mb-2">{{'Get To Know Us'|translate}}</h6>
+          <p>
+           <a class="text-white-50 link-light link-underline-opacity-0 link-underline-opacity-100-hover"
+            href="#">{{'About Amazon'|translate}} </a>
+          </p>
+
+          <p>
+            <a class="text-white-50 link-light  link-underline-opacity-0 link-underline-opacity-100-hover"
+            href="#"> {{'Careers'|translate}} </a>
+          </p>
+          <p>
+          <a class="text-white-50 link-light  link-underline-opacity-0 link-underline-opacity-100-hover"
+            href="#">{{'Amazon Science'|translate}} </a>
+        </p>
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-12 mb-4 mb-md-0">
+          <h6 class="mb-2">{{'Shop With Us'|translate}}</h6>
+          <p>
+           <a class="text-white-50 link-light link-underline-opacity-0 link-underline-opacity-100-hover"
+           routerLink="/profile" >{{'Your Account'|translate}} </a>
+          </p>
+
+          <p>
+            <a class="text-white-50 link-light  link-underline-opacity-0 link-underline-opacity-100-hover"
+           routerLink="/Order"> {{'Your Orders'|translate}} </a>
+          </p>
+          <p>
+          <a class="text-white-50 link-light  link-underline-opacity-0 link-underline-opacity-100-hover"
+          routerLink="/shipping"  >{{'Your Adresses'|translate}} </a>
+          </p>
+        <p>
+          <a class="text-white-50 link-light  link-underline-opacity-0 link-underline-opacity-100-hover"
+            href="#">{{'Your Lists'|translate}} </a>
+        </p>
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+          <div class="col-lg-3 col-md-12 mb-4 mb-md-0">
+            <h6 class="mb-2">{{'Make Money with Us'|translate}}</h6>
+            <p>
+             <a class="text-white-50 link-light link-underline-opacity-0 link-underline-opacity-100-hover"
+              href="#">{{'Protect and build your brand'|translate}}</a>
+            </p>
+
+            <p>
+              <a class="text-white-50 link-light  link-underline-opacity-0 link-underline-opacity-100-hover"
+              href="#">{{'Advertise Your Products'|translate}} </a>
+            </p>
+            <p>
+            <a class="text-white-50 link-light  link-underline-opacity-0 link-underline-opacity-100-hover"
+            routerLink="/Home">{{'Sell on Amazon'|translate}} </a>
+            </p>
+          <p>
+            <a class="text-white-50 link-light  link-underline-opacity-0 link-underline-opacity-100-hover"
+              href="#"> {{'Fulfillment by Amazon'|translate}} </a>
+          </p>
+        </div>
+        <!--Grid column-->
+         <!--Grid column-->
+         <div class="col-lg-3 col-md-12 mb-4 mb-md-0">
+          <h6 class="mb-2">{{'Let Us Help You'|translate}}</h6>
+          <p>
+           <a class="text-white-50 link-light link-underline-opacity-0 link-underline-opacity-100-hover"
+            href="#">{{'Help'|translate}}</a>
+          </p>
+
+          <p>
+            <a class="text-white-50 link-light  link-underline-opacity-0 link-underline-opacity-100-hover"
+            routerLink="/shipping">{{'Shipping & Delivery'|translate}}</a>
+          </p>
+          <p>
+          <a class="text-white-50 link-light  link-underline-opacity-0 link-underline-opacity-100-hover"
+            href="#">{{'Returns & Replacements'|translate}}</a>
+          </p>
+        <p>
+          <a class="text-white-50 link-light  link-underline-opacity-0 link-underline-opacity-100-hover"
+            href="#"> {{'Amazon App Download'|translate}} </a>
+        </p>
+      </div>
+      <!--Grid column-->
+      </div>
+      <hr>
+      <!--Grid row-->
+      <div class="row mt-4 justify-content-center">
+        <div class="col-md-6 col-sm-12 text-sm-start d-flex align-items-center
+        justify-content-center">
+          <a href="/" class=" mb-2 mb-lg-0 text-white text-decoration-none">
+            <img src="assets/images/logo.png" class="img-flued" width="90px">
+          </a>
+          <select class="form-select mx-3 w-25" [(ngModel)]="Changlang">
+            <option value="en">English</option>
+            <option value="ar">العربيه</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <!-- Grid container -->
+
+
+  </footer>
+  <div class="row">
+    <!-- Copyright -->
+    <div class="text-center px-0 py-3 text-light Copyright">
+      © 2020 Copyright:
+      <a class="text-white " href="https://Amazon.com/">AmazonPrototype.com</a>
+    </div>
+    <!-- Copyright -->
+  </div>
+</div>
+
+<!-- End of .container -->
+

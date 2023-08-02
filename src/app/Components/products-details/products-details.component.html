@@ -1,0 +1,210 @@
+  <section class="py-5">
+    <div class="container">
+      <div class="row gx-5">
+        <aside class="col-lg-6">
+          <div class="border rounded-4 mb-3 d-flex justify-content-center">
+            <ng-container *ngIf="product?.images !=null">
+              <img style="max-width: 100%; max-height: 80vh; margin: auto;" class="img-fluid rounded-4 fit  border border-2" id="preview"  [src]="firstImage" />
+            </ng-container>
+          </div>
+          <div class="d-flex justify-content-center mb-3">
+            <ng-container *ngFor="let item of product?.images">
+              <img width="60" height="60" class="rounded-2 mx-3"  [src]="item" appProductDetails />
+            </ng-container>
+
+          </div>
+          <!-- thumbs-wrap.// -->
+          <!-- gallery-wrap .end// -->
+        </aside>
+        <main class="col-lg-6">
+          <div class="ps-lg-3">
+            <ng-container *ngIf="language=='en';else lang">
+              <h4 class="title text-dark">
+                {{product?.name}}
+              </h4>
+            </ng-container>
+            <ng-template #lang>
+              <h4 class="title text-dark">
+                {{product?.arabicName}}
+              </h4>
+            </ng-template>
+            <div class="d-flex flex-row my-3">
+              <div class="text-warning mb-1 me-2">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <span class="ms-1">
+                  4.5
+                </span>
+              </div>
+              <span class="text-muted"><i class="fas fa-shopping-basket fa-sm mx-1"></i>154 orders</span>
+              <span class="text-success ms-2">In stock</span>
+            </div>
+
+            <div class="mb-3">
+              <ng-container *ngIf="language=='en';else langs">
+                <h4 class="title text-dark">
+                  {{product?.price|currency:'EGP':'symbol'}}
+                </h4>
+              </ng-container>
+              <ng-template #langs>
+                <h4 class="title text-dark">
+                  {{product?.price|currency:'ج.م':'symbol'}}
+                </h4>
+              </ng-template>
+            </div>
+            <ng-container *ngIf="language=='en';else langd">
+              <p >
+                {{product?.description}}
+              </p>
+            </ng-container>
+            <ng-template #langd>
+              <p >
+                {{product?.arabicDescription}}
+              </p>
+            </ng-template>
+            <hr />
+
+            <div class="row mb-4">
+              <div class="col-md-6 col-6 mb-3">
+                <label class="mb-2 fs-4 text-center">{{'Quantity'|translate}}</label>
+
+                <div class="input-group" style="width: 170px;">
+                  <select [(ngModel)]="Quantity" [ngModelOptions]="{standalone: true}" class="form-control rounded-pill d-inline mx-auto w-75">
+                    <ng-container *ngFor="let i of numbers">
+                      <option class="text-center">{{i}}</option>
+                    </ng-container>
+                  </select>
+                  <a  data-toggle="modal" data-target="#myModal" (click)="addToCart(product)" class="btn btn-warning shadow-0 m-2 rounded-pill"> <i class="me-1 fa fa-shopping-basket"></i> {{'Add to cart'|translate}} </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </section>
+  <!-- content -->
+
+  <section class="bg-light border-top py-4">
+    <div class="container">
+      <div class="row gx-4">
+        <div class="col-lg-8 mb-4">
+          <div class="border rounded-2 px-3 py-2 bg-white">
+            <!-- Pills content -->
+            <div class="tab-content" id="ex1-content">
+              <div class="tab-pane fade show active" id="ex1-pills-1" role="tabpanel" aria-labelledby="ex1-tab-1">
+
+                <h2>{{'Important information'|translate}}</h2>
+                <hr>
+                <h2>{{'Customer Reviews'|translate}}</h2>
+                <div class="p-1">
+                  <div class="starRating d-flex flex-row">
+                    <span class="mt-1"  *ngFor="let index of [1,2,3,4,5]"
+                    [ngClass]="[productRating>=index ? 'fa fa-star checked' :'fa fa-star']" id=index ></span>
+                    <h5 class="ms-1">{{productRating}} {{'out of'|translate}} 5</h5>
+                  </div>
+                  <div>
+                </div>
+                <div class="main p-2" *ngFor="let rate of productRates | keyvalue">
+                  <p class="me-1">{{rate.key}} {{'star'|translate}}</p>
+                  <div class="mt-1">
+                <div class="progress" role="progressbar" aria-label="Warning example"
+                   aria-valuemin="1" aria-valuemax="5">
+                  <div class="progress-bar bg-warning" [style.width.%]="(rate.value/reviewsCount)*100"></div>
+                </div>
+                </div>
+                <p class="ms-1">{{(rate.value/reviewsCount)*100}}%</p>
+                </div>
+                <button class="btn btn-secondary text-center ms-4" (click)="ProductRate(product)" >
+                  {{'Write a customer review'|translate}}</button>
+                </div>
+                </div>
+                <div class="col-sm-12 m-5 p-3" >
+                  <h4>{{'Top review from Egypt'|translate}}</h4>
+                  <div class="d-flex flex-column m-4" *ngFor="let rate of customerReviews">
+                    <div class="d-flex flex-row col-sm-12">
+                      <img src="assets/images/profile.png" class="avatar img-flued" style="width: 50px;height:50px;">
+                      <p class="m-2">{{rate.userName}}</p>
+                    </div>
+                      <div class="col-3 col-sm-12 starRating">
+                        <span  *ngFor="let index of [1,2,3,4,5]"
+                        [ngClass]="[rate.rate>=index ? 'fa fa-star checked' :'fa fa-star']" id=index ></span>
+                      </div>
+                      <div class="col-7 col-sm-12">
+                        <h5>{{rate.review}}</h5>
+                      </div>
+                      </div>
+                <!--end past  -->
+              </div>
+            </div>
+            <!-- Pills content -->
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="px-0 border rounded-2 shadow-0">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">{{'Similar items'|translate}}</h5>
+                <hr>
+                <ng-container *ngFor="let prod of products| paginate: { itemsPerPage: 5, currentPage: 1 }">
+                  <div class="d-flex mb-3">
+                    <a  routerLink="/ProductsDetails/{{prod.id}}" class="me-3">
+                      <img [src]="prod.images[0]" style="min-width: 96px; height: 96px;" class="img-md  img-thumbnail" />
+                    </a>
+                    <div class="info mx-3">
+                      <ng-container *ngIf="language=='en';else lang">
+                        <a  routerLink="/ProductsDetails/{{prod.id}}" class="nav-link mb-1">
+                          {{prod?.name}}
+                        </a>
+                      </ng-container>
+                      <ng-template #lang>
+                        <a routerLink="/ProductsDetails/{{prod.id}}" class="nav-link mb-1">
+                          {{prod?.arabicName}}
+                        </a>
+                      </ng-template>
+                      <ng-container *ngIf="language=='en';else langs">
+                        <h4 class="title text-dark">
+                          {{prod?.price|currency:'EGP':'symbol'}}
+                        </h4>
+                      </ng-container>
+                      <ng-template #langs>
+                        <h4 class="title text-dark">
+                          {{prod?.price|currency:'ج.م':'symbol'}}
+                        </h4>
+                      </ng-template>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <ng-container *ngIf="language=='en';else ar">
+    <div class="container  cont" style=" display:none;background-color:#81b66e;" #popup>
+      <div class="popup1" >
+        <img  src="/assets/images/Clear-Tick-icon.png">
+        <h2>{{product?.name}}</h2>
+        <p> is added to cart</p>
+        <button  class="btn btn-warning shadow-0 m-2 rounded-pill"
+         (click)="close()">Ok</button>
+         </div>
+         </div>
+  </ng-container>
+  <ng-template #ar>
+    <div class="container  cont" style=" display:none;background-color:#81b66e;" #popup>
+      <div class="popup1ar" >
+        <img  src="/assets/images/Clear-Tick-icon.png">
+        <h2>{{product?.name}}</h2>
+        <p> is added to cart</p>
+        <button  class="btn btn-warning shadow-0 m-2 rounded-pill"
+         (click)="close()">Ok</button>
+         </div>
+         </div>
+  </ng-template>
+

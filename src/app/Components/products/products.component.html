@@ -1,0 +1,109 @@
+<div class="container-fluid">
+	<div class="row my-5">
+	<aside class="col-md-3">
+
+<div class="card">
+	<article class="filter-group">
+		<header class="card-header">
+			<a data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
+				<i class="icon-control fa fa-chevron-down"></i>
+				<h6 class="title">{{'Categories'|translate}}</h6>
+			</a>
+		</header>
+		<div class="filter-content collapse show" id="collapse_1">
+			<div class="card-body">
+				<ul style="list-style-type: none;list-style-position: inside;">
+          <ng-container *ngIf="lnaguage== 'en' else chacklang">
+            <li *ngFor="let category of subcategories">
+              <a  class="link-price" routerLinkActive="active" (click)="GetProductsBysubcategory(category.id)">{{category.name}}</a>
+            </li>
+          </ng-container>
+          <ng-template #chacklang>
+            <li *ngFor="let category of subcategories">
+              <a  class="link-price" routerLinkActive="active" (click)="GetProductsBysubcategory(category.id)">{{category.arabicName}}</a>
+            </li>
+          </ng-template>
+				</ul>
+
+			</div>
+		</div>
+	</article>
+	<article class="filter-group">
+		<header class="card-header">
+			<a  data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
+				<i class="icon-control fa fa-chevron-down"></i>
+				<h6 class="title">{{'Price'|translate}} </h6>
+			</a>
+		</header>
+		<div class="filter-content collapse show" id="collapse_3">
+			<div class="card-body">
+
+        <ul>
+          <p class="lin-height"><a (click)="GetPricedProducts(0,50)" class="link-price">{{'Up to'|translate}} 50 {{'EGP'|translate}}</a></p>
+          <p class="lin-height"><a (click)="GetPricedProducts(50,100)"  class="link-price">50 {{'to'|translate}} 100 {{'EGP'|translate}}</a></p>
+          <p class="lin-height"><a (click)="GetPricedProducts(100,200)"  class="link-price">100 {{'to'|translate}} 200 {{'EGP'|translate}}</a></p>
+          <p class="lin-height"><a (click)="GetPricedProducts(200,300)"  class="link-price">200 {{'to'|translate}} 300 {{'EGP'|translate}}</a></p>
+          <p class="lin-height"><a (click)="GetPricedProducts(300,400)"  class="link-price">300 {{'to'|translate}} 400 {{'EGP'|translate}}</a></p>
+          <p class="lin-height"><a (click)="GetPricedProducts(400,500)"  class="link-price">400 {{'to'|translate}} 500 {{'EGP'|translate}}</a></p>
+          <p class="lin-height"><a (click)="GetPricedProductsAbove(500)" class="link-price">500 {{'EGP'|translate}} & {{'above'|translate}}</a></p>
+        </ul>
+				<div class="form-row">
+				<div class="form-group col-md-6">
+				  <label class="mx-3">{{'Min'|translate}}</label>
+				  <input class="form-control mx-3 my-2" #minprice placeholder="$0" min="0" type="number">
+				</div>
+				<div class="form-group text-right  col-md-6">
+				  <label class="mx-3">{{'Max'|translate}}</label>
+				  <input class="form-control  mx-3 my-2" min="0" #maxprice placeholder="$1,0000" type="number">
+				</div>
+				</div>
+				<button class="btn btn-block btn-warning mx-3 my-2" (click)="GetPricedProducts(minprice.value,maxprice.value)">{{'Apply'|translate}}</button>
+			</div>
+		</div>
+	</article>
+</div>
+
+
+	</aside>
+<main class="col-md-9">
+ <div class="row">
+<ng-container *ngFor="let product of products | paginate: { itemsPerPage: itemsperpage, currentPage: page }">
+  <div class="container">
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-10 my-2">
+            <div class="row p-2 bg-white border rounded">
+                <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" [src]="product.images[0]"></div>
+                <div class="col-md-6 mt-1">
+                  <ng-container *ngIf="lnaguage== 'en';else checklang">
+                    <h4 class="title">{{product.name}}</h4>
+                  </ng-container>
+                    <ng-template #checklang>
+                      <h4 class="title">{{product.arabicName}}</h4>
+                    </ng-template>
+                    <div class="d-flex flex-row">
+                        <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div><span>310</span>
+                    </div>
+                </div>
+                <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                    <div class="d-flex flex-row align-items-center">
+                        <ng-container *ngIf="lnaguage== 'en';else checklangs">
+                          <h4 class="mr-1">{{product.price|currency:'EGP':'code'}}</h4>
+                        </ng-container>
+                          <ng-template #checklangs>
+                            <h4 class="mr-1">{{product.price|currency:'ج.م':'symbol'}}</h4>
+                          </ng-template>
+                    </div>
+                    <div class="d-flex flex-column mt-4"><button class="btn btn-warning btn-sm" type="button" routerLink="/ProductsDetails/{{product.id}}">{{'Details'|translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</ng-container>
+<div class="text-center my-4">
+  <pagination-controls *ngIf="products.length>0" (pageChange)="page = $event"></pagination-controls></div>
+  </div>
+	</main>
+	</div>
+</div>
